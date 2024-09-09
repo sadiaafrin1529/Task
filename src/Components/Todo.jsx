@@ -1,9 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import not_tick from "../assets/not_tick.png";
 import TodoList from "./TodoList";
 
 const Todo = () => {
-  const [todoList, setTodoList] = useState([]); // State for storing the todo list
+  // State for storing the todo list
+  // const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(
+    localStorage.getItem("todos")
+      ? JSON.parse(localStorage.getItem("todos"))
+      : []
+  );
   const inputInfo = useRef(); // Ref for input
 
   const handleKeyDown = (event) => {
@@ -30,9 +36,10 @@ const Todo = () => {
     }
   };
 
-
   //localstorage
-  
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todoList));
+  }, [todoList]);
 
   return (
     <>
