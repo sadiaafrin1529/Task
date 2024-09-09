@@ -35,8 +35,13 @@ const Todo = () => {
       inputInfo.current.value = "";
     }
   };
+  // Delete data
+  const deleteTodo = (id) => {
+    setTodoList((prevTodoList) =>
+    prevTodoList.filter((afterTodoList)=> afterTodoList.id !== id))
+  }
 
-  //localstorage
+  // localstorage
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todoList));
   }, [todoList]);
@@ -68,7 +73,13 @@ const Todo = () => {
           "" 
         )} */}
         {todoList.map((todo, index) => (
-          <TodoList key={index} text={todo.text} />
+          <TodoList
+            key={index}
+            text={todo.text}
+            id={todo.id}
+            isComplete={todo.isComplete}
+            deleteTodo={deleteTodo}
+          />
         ))}
       </div>
     </>
