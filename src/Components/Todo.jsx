@@ -1,18 +1,48 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import not_tick from "../assets/not_tick.png";
+import TodoList from "./TodoList";
 
 const Todo = () => {
+  const [todoList, setTodoList] = useState([]); // State for storing the todo list
+  const inputInfo = useRef(); // Ref for input
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      // Corrected "Enter" key spelling
+      const textInfo = inputInfo.current.value.trim();
+      if (textInfo === "") {
+        return alert("Please enter a todo");
+      }
+
+      const newTodo = {
+        id: Date.now(),
+        text: textInfo, // Correct reference to the input text
+        isComplete: false,
+      };
+
+      console.log(newTodo);
+
+      // Update the todo list state with the new todo
+      setTodoList((prevTodoList) => [...prevTodoList, newTodo]);
+
+      // Clear the input field
+      inputInfo.current.value = "";
+    }
+  };
+
+
+  //localstorage
+  
+
   return (
-      <>
-          {/* title */}
-          {/* <div>
-              <p>TODO</p>
-          </div> */}
+    <>
       {/* input section */}
       <div className="w-full flex justify-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-32 px-4">
         <div className="bg-gray-200 rounded-md py-4 pl-4 sm:pl-6 lg:pl-7 gap-3 flex items-center w-full max-w-sm sm:max-w-md lg:max-w-lg outline-none border-0 h-14 pr-2 placeholder:text-slate-600">
           <img className="w-5 sm:w-6 lg:w-7" src={not_tick} alt="not tick" />
           <input
+            ref={inputInfo}
+            onKeyDown={handleKeyDown}
             type="text"
             className="bg-transparent outline-none border-0 flex-1 text-sm sm:text-base lg:text-lg"
             placeholder="Create a new Todo..."
@@ -20,9 +50,19 @@ const Todo = () => {
         </div>
       </div>
 
-      {/* todolist */}
+      {/* todo list */}
       <div className="place-self-center bg-white flex w-full max-w-sm sm:max-w-md lg:max-w-lg min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[550px] mb-20 sm:mb-24 lg:mb-36 flex-col p-4 sm:p-6 lg:p-7 rounded-md">
-       
+        {/* {todoList.length > 0 ? (
+          todoList.map((todo, index) => (
+            <TodoList key={index} text={todo.text} />
+          ))
+        ) : (
+        // Placeholder message when no todos are present
+          "" 
+        )} */}
+        {todoList.map((todo, index) => (
+          <TodoList key={index} text={todo.text} />
+        ))}
       </div>
     </>
   );
