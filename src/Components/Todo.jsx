@@ -35,11 +35,32 @@ const Todo = () => {
       inputInfo.current.value = "";
     }
   };
+
+
+
   // Delete data
   const deleteTodo = (id) => {
     setTodoList((prevTodoList) =>
     prevTodoList.filter((afterTodoList)=> afterTodoList.id !== id))
   }
+
+
+
+  //toggle
+  const Toggle = (id) => {
+    setTodoList((prevTodoList) =>
+      prevTodoList.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, isComplete: !todo.isComplete }; 
+        }
+        return todo;
+      })
+    );
+  };
+
+
+
+
 
   // localstorage
   useEffect(() => {
@@ -51,7 +72,11 @@ const Todo = () => {
       {/* input section */}
       <div className="w-full flex justify-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-32 px-4">
         <div className="bg-gray-200 rounded-md py-4 pl-4 sm:pl-6 lg:pl-7 gap-3 flex items-center w-full max-w-sm sm:max-w-md lg:max-w-lg outline-none border-0 h-14 pr-2 placeholder:text-slate-600">
-          <img className="w-5 sm:w-6 lg:w-7" src={not_tick} alt="not tick" />
+          <img
+            className="w-5 sm:w-6 lg:w-7 cursor-pointer hover:bg-gradient-to-r rounded-full hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 transition-all"
+            src={not_tick}
+            alt="not tick"
+          />
           <input
             ref={inputInfo}
             onKeyDown={handleKeyDown}
@@ -79,6 +104,7 @@ const Todo = () => {
             id={todo.id}
             isComplete={todo.isComplete}
             deleteTodo={deleteTodo}
+            Toggle={Toggle}
           />
         ))}
       </div>
