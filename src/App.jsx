@@ -8,11 +8,9 @@ function App() {
 
   return (
     <>
-      <div className=" grid ">
-        {/* <p className='text-white place-self-center me-96'>Todo</p> */}
-        <div>
-          
-        </div>
+      <div className=" grid  dark:bg-slate-900 ">
+       
+      
         <Todo />
       </div>
     </>
