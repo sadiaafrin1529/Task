@@ -2,11 +2,39 @@ import React, { useEffect, useRef, useState } from "react";
 import not_tick from "../assets/not_tick.png";
 import TodoList from "./TodoList";
 
+import backGroundImage from "../assets/bg-desktop-light.jpg";
 const Todo = () => {
-  //button active inactive
- const [activeFilter, setActiveFilter] = useState("All");
+  // Light-dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  console.log("Current active filter:", activeFilter); 
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const appStyles = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    backgroundColor: isDarkMode ? "#333" : "#fff",
+    color: isDarkMode ? "#fff" : "#000",
+    transition: "all 0.3s ease",
+  };
+
+  const buttonStyles = {
+    padding: "10px 20px",
+    fontSize: "16px",
+    backgroundColor: isDarkMode ? "#fff" : "#000",
+    color: isDarkMode ? "#000" : "#fff",
+    border: "none",
+    cursor: "pointer",
+    marginTop: "20px",
+  };
+  //button active inactive
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  console.log("Current active filter:", activeFilter);
 
   // State for storing the todo list
   // const [todoList, setTodoList] = useState([]);
@@ -29,8 +57,7 @@ const Todo = () => {
         id: Date.now(),
         text: textInfo, // Correct reference to the input text
         isComplete: false,
-        status:"All",
-       
+        status: "All",
       };
 
       console.log(newTodo);
@@ -87,27 +114,35 @@ const Todo = () => {
   };
 
   return (
-    <>
+    <div style={{ appStyles }}>
       {/* input section */}
-      <div className="w-full flex justify-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-32 px-4">
-        <div className="bg-gray-200 rounded-md py-4 pl-4 sm:pl-6 lg:pl-7 gap-3 flex items-center w-full max-w-sm sm:max-w-md lg:max-w-lg outline-none border-0 h-14 pr-2 placeholder:text-slate-600">
-          <img
-            className="w-5 sm:w-6 lg:w-7 cursor-pointer hover:bg-gradient-to-r rounded-full hover:from-blue-600 hover:via-purple-200 hover:to-pink-200 transition-all"
-            src={not_tick}
-            alt="not tick"
-          />
-          <input
-            ref={inputInfo}
-            onKeyDown={handleKeyDown}
-            type="text"
-            className="bg-transparent outline-none border-0 flex-1 text-sm sm:text-base lg:text-lg"
-            placeholder="Create a new Todo..."
-          />
+      <div className="background">
+        <div className="w-[50%] mx-auto flex justify-between items-center">
+          <p className="text-[40px] font-bold text-white">TODO</p>
+          <button style={buttonStyles} onClick={toggleTheme}>
+            Switch to {isDarkMode ? "Light" : "Dark"} Mode
+          </button>
+        </div>
+        <div className="w-full flex justify-center  mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-32 px-4">
+          <div className="bg-white shadow-lg shadow-gray-500/50 rounded-md py-4 pl-4 sm:pl-6 lg:pl-7 gap-3 flex items-center w-full max-w-sm sm:max-w-md lg:max-w-lg outline-none border-0 h-14 pr-2 placeholder:text-slate-600">
+            <img
+              className="w-5 sm:w-6 lg:w-7 cursor-pointer hover:bg-gradient-to-r rounded-full hover:from-blue-600 hover:via-purple-200 hover:to-pink-200 transition-all"
+              src={not_tick}
+              alt="not tick"
+            />
+            <input
+              ref={inputInfo}
+              onKeyDown={handleKeyDown}
+              type="text"
+              className="bg-transparent outline-none border-0 flex-1 text-sm sm:text-base lg:text-lg"
+              placeholder="Create a new Todo..."
+            />
+          </div>
         </div>
       </div>
 
       {/* todo list */}
-      <div className="place-self-center bg-white flex w-full max-w-sm sm:max-w-md lg:max-w-lg min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[550px] mb-20 sm:mb-24 lg:mb-36 flex-col p-4 sm:p-6 lg:p-7 rounded-md">
+      <div className="place-self-center mx-auto  shadow-lg shadow-gray-500/50 bg-white flex w-full max-w-sm sm:max-w-md lg:max-w-lg  mb-20 sm:mb-24 lg:mb-36 flex-col p-4 sm:p-6 lg:p-7 rounded-md">
         {/* {todoList.length > 0 ? (
           todoList.map((todo, index) => (
             <TodoList
@@ -144,7 +179,7 @@ const Todo = () => {
             />
           ))
         ) : (
-          <p className="font-bold text-center text-3xl text-red-900 justify-center items-center mt-40 ">
+          <p className="font-bold text-center text-3xl text-red-900 justify-center items-center  ">
             No Data
           </p> // Placeholder message when no todos are present
         )}
@@ -168,7 +203,7 @@ const Todo = () => {
               ))}
           </div> */}
 
-          <div className="inline-flex gap-2 font-bold  ">
+          <div className="inline-flex gap-2 font-semibold  ">
             <button
               onClick={() => setActiveFilter("All")}
               className={
@@ -210,7 +245,7 @@ const Todo = () => {
         </div>
         {/* <hr className=" mt-auto" /> */}
       </div>
-    </>
+    </div>
   );
 };
 

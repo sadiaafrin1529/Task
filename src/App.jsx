@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-stone-900 grid min-h-screen">
+      <div className=" grid ">
         {/* <p className='text-white place-self-center me-96'>Todo</p> */}
         <div>
           
