@@ -1,8 +1,8 @@
-
+/* 
 
 
 .background{
-    /* margin: 10px 20px; */
+    margin: 10px 20px;
     padding: 40px 0px;
     background: url('./assets/bg-desktop-light.jpg');
     background-repeat: no-repeat;
@@ -10,7 +10,13 @@
     background-size: cover;
     
 }
-/* .background1{
+ .background1{
     
-} */
+    background: url('./assets/bg-desktop-dark.jpg');
+     background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 
+} 
+
+ */

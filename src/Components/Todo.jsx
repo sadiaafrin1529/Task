@@ -7,7 +7,8 @@ import { IoMoon } from "react-icons/io5";
 import { IoSunny } from "react-icons/io5";
 import { IconContext } from "react-icons";
 
-import backGroundImage from "../assets/bg-desktop-light.jpg";
+import backGroundImage from "../assets/bg-desktop-dark.jpg";
+import toast, { Toaster } from "react-hot-toast";
 const Todo = () => {
 
 
@@ -47,6 +48,7 @@ const darkModeHandler = () => {
 };
 
 
+  //
 
 
   //button active inactive
@@ -70,7 +72,7 @@ const darkModeHandler = () => {
       // Corrected "Enter" key spelling
       const textInfo = inputInfo.current.value.trim();
       if (textInfo === "") {
-        return alert("Please enter a todo");
+    return  toast.error("It's Empty.Please Enter Todos");
       }
 
       const newTodo = {
@@ -137,7 +139,7 @@ const darkModeHandler = () => {
     // style={{ appStyles }}
 
     <div className="min-h-screen">
-      <div className="background">
+      <div className="background bg-code dark:bg-light-code bg-no-repeat bg-center bg-cover bg-fixed flex flex-wrap content-center w-full min-h-96">
         {/* todo Titele */}
         <div className="w-[50%] mx-auto flex justify-between items-center ">
           <p className="text-[40px] font-bold text-white">TODO</p>
@@ -276,8 +278,10 @@ const darkModeHandler = () => {
         </div>
         {/* <hr className=" mt-auto" /> */}
       </div>
+      <Toaster />
     </div>
   );
+  
 };
 
 export default Todo;
