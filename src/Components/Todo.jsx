@@ -4,7 +4,9 @@ import TodoList from "./TodoList";
 
 const Todo = () => {
   //button active inactive
-  const [activeFilter, setActiveFilter] = useState("All");
+ const [activeFilter, setActiveFilter] = useState("All");
+
+  console.log("Current active filter:", activeFilter); 
 
   // State for storing the todo list
   // const [todoList, setTodoList] = useState([]);
@@ -142,7 +144,9 @@ const Todo = () => {
             />
           ))
         ) : (
-          <p className="font-bold text-center text-3xl text-red-900 justify-center items-center mt-40 ">No Data</p> // Placeholder message when no todos are present
+          <p className="font-bold text-center text-3xl text-red-900 justify-center items-center mt-40 ">
+            No Data
+          </p> // Placeholder message when no todos are present
         )}
         <div className="border-t-2 mt-auto flex justify-between items-center">
           {/* items show */}
@@ -164,28 +168,34 @@ const Todo = () => {
               ))}
           </div> */}
 
-          <div className="inline-flex">
+          <div className="inline-flex gap-2 font-bold  ">
             <button
               onClick={() => setActiveFilter("All")}
-              className={`text-slate-500 hover:text-black font-bold py-2 px-4 rounded-l ${
-                activeFilter === "All" ? "text-blue-500" : ""
-              }`}
+              className={
+                activeFilter === "All"
+                  ? "text-blue-600"
+                  : "text-gray-500 hover:text-black"
+              }
             >
               All
             </button>
             <button
               onClick={() => setActiveFilter("Active")}
-              className={`text-slate-500 hover:text-black font-bold py-2 px-4 ${
-                activeFilter === "Active" ? "text-blue-500" : ""
-              }`}
+              className={
+                activeFilter === "Active"
+                  ? "text-blue-600"
+                  : "text-gray-500 hover:text-black"
+              }
             >
               Active
             </button>
             <button
               onClick={() => setActiveFilter("Completed")}
-              className={`text-slate-500 hover:text-black font-bold py-2 px-4 rounded-r ${
-                activeFilter === "Completed" ? "text-blue-500" : ""
-              }`}
+              className={
+                activeFilter === "Completed"
+                  ? "text-blue-600"
+                  : "text-gray-500 hover:text-black"
+              }
             >
               Completed
             </button>
@@ -193,7 +203,7 @@ const Todo = () => {
 
           <button
             onClick={clearCompletedTodos}
-            class=" font-semibold text-slate-500 hover:text-black "
+            className=" font-semibold text-slate-500 hover:text-black "
           >
             Clear Completed
           </button>
