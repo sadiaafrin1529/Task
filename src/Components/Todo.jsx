@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import not_tick from "../assets/not_tick.png";
+import search from "../assets/search.png";
 import TodoList from "./TodoList";
 import { faMoon } from "@fortawesome/free-regular-svg-icons";
 
@@ -9,6 +10,7 @@ import { IconContext } from "react-icons";
 
 import backGroundImage from "../assets/bg-desktop-dark.jpg";
 import toast, { Toaster } from "react-hot-toast";
+import { FiSearch } from "react-icons/fi";
 const Todo = () => {
 
 
@@ -48,7 +50,7 @@ const darkModeHandler = () => {
 };
 
 
-  //
+  
 
 
   //button active inactive
@@ -65,8 +67,11 @@ const darkModeHandler = () => {
       ? JSON.parse(localStorage.getItem("todos"))
       : []
   );
-  const inputInfo = useRef(); // Ref for input
 
+  
+
+  const inputInfo = useRef(); // Ref for input
+//Input data
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       // Corrected "Enter" key spelling
@@ -82,7 +87,7 @@ const darkModeHandler = () => {
         status: "All",
       };
 
-      console.log(newTodo);
+      // console.log(newTodo);
 
       // Update the todo list state with the new todo
       setTodoList((prevTodoList) => [...prevTodoList, newTodo]);
@@ -135,12 +140,44 @@ const darkModeHandler = () => {
     setTodoList(filteredTodos);
   };
 
+
+  //search
+  // const searchRef = useRef(null);
+  //  const [searchUsers, setSearchTodos] = useState([]);
+  // const filterBy = (input) => { }
+  // setSearchTodos([]);
+  // let list = todoList?.filter(
+  //   (item) => item.username.toLowerCase().indexOf(input.toLowerCase()) !== -1
+  // );
+
+// const searchRef = useRef(null);
+// const [filteredTodos, setFilteredTodos] = useState(todoList);
+
+// // Function to filter todos based on the search input
+// const filterBy = (input) => {
+//   let list = todoList.filter(
+//     (item) => item.text.toLowerCase().indexOf(input.toLowerCase()) !== -1
+//   );
+
+//   if (input) {
+//     setFilteredTodos(list); // Set filtered todos when input is present
+//   } else {
+//     setFilteredTodos(todoList); // Reset to original list when input is cleared
+//   }
+// };
+
+// // Handler for search input change
+// const onSearchRef = () => {
+//   const input = searchRef.current.value; // Get value from the search input field
+//   filterBy(input); // Call the filter function with the input value
+// };
+
   return (
     // style={{ appStyles }}
 
     <div className="min-h-screen">
-      <div className="background bg-code dark:bg-light-code bg-no-repeat bg-center bg-cover bg-fixed flex flex-wrap content-center w-full min-h-96">
-        {/* todo Titele */}
+      <div className=" bg-code dark:bg-light-code bg-no-repeat bg-center bg-cover bg-fixed flex flex-wrap content-center w-full min-h-96">
+        {/* todo Title */}
         <div className="w-[50%] mx-auto flex justify-between items-center ">
           <p className="text-[40px] font-bold text-white">TODO</p>
           {/* <button style={buttonStyles} onClick={toggleTheme}>
@@ -156,7 +193,7 @@ const darkModeHandler = () => {
           </button>
         </div>
         {/* input section */}
-        <div className="w-full flex justify-center  mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-32 px-4 ">
+        <div className="w-full flex justify-center  mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-44 px-4 ">
           <div className="bg-white shadow-lg dark:bg-slate-900 dark:text-white shadow-gray-500/50 rounded-md py-4 pl-4 sm:pl-6 lg:pl-7 gap-3 flex items-center w-full max-w-sm sm:max-w-md lg:max-w-lg outline-none border-0 h-14 pr-2 placeholder:text-slate-600">
             <img
               className="w-5 sm:w-6 lg:w-5 cursor-pointer hover:bg-gradient-to-r rounded-full hover:from-blue-600 hover:via-purple-200 hover:to-pink-200 transition-all"
@@ -172,10 +209,26 @@ const darkModeHandler = () => {
             />
           </div>
         </div>
+
+        {/* Search */}
+        {/* <div className="w-full flex justify-center mt-7 sm:mt-5 md:mt-15 lg:mt-7 xl:mt-5 px-4 ">
+          <div className="bg-white shadow-lg dark:bg-slate-900 dark:text-white shadow-gray-500/50 rounded-md py-4 pl-4 sm:pl-6 lg:pl-7 gap-3 flex items-center w-full max-w-sm sm:max-w-md lg:max-w-lg outline-none border-0 h-14 pr-2 placeholder:text-slate-600">
+            
+            <FiSearch className="cursor-pointer" />
+
+            <input
+              ref={searchRef}
+              type="text"
+              className="bg-transparent outline-none border-0 flex-1 text-sm sm:text-base lg:text-lg "
+              placeholder="Search Todos..."
+              onKeyDown={onSearchRef}
+            />
+          </div>
+        </div> */}
       </div>
 
       {/* todo list */}
-      <div className="place-self-center mx-auto dark:bg-slate-900 dark:text-white shadow-lg shadow-gray-500/50 bg-white flex w-full max-w-sm sm:max-w-md lg:max-w-lg  mb-20 sm:mb-24 lg:mb-36 flex-col p-4 sm:p-6 lg:p-7 rounded-md">
+      <div className="place-self-center mx-auto dark:bg-slate-900 dark:text-white shadow-lg shadow-gray-500/50 bg-white flex w-full max-w-sm sm:max-w-md lg:max-w-lg   sm:mb-24 lg:mb-36 flex-col p-4 sm:p-6 lg:p-7 rounded-md">
         {/* {todoList.length > 0 ? (
           todoList.map((todo, index) => (
             <TodoList
